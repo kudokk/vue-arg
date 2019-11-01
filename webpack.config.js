@@ -1,20 +1,26 @@
 const path = require('path')
+const webpack = require("webpack");
 
 module.exports = {
   mode: process.env.NODE_ENV,
 
   entry: {
-    'main': path.resolve(__dirname, './src/main.js')
+    'main': [
+      path.resolve(__dirname, './src/main.js')
+    ]
   },
 
   output: {
     path: `${__dirname}/dist/js/`,
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: `${__dirname}/dist/`,
   },
 
   resolve: {
+    extensions: ['.js', '.vue'],
     alias: {
-      '@': path.resolve(__dirname, 'src')
+      '@': path.resolve(__dirname, 'src'),
+      'vue$': 'vue/dist/vue.esm.js'
     }
   },
 
@@ -73,6 +79,10 @@ module.exports = {
       }
     ]
   },
+
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ],
 
   devtool: process.env.NODE_ENV === 'development' ? 'source-map' : 'none'
 
