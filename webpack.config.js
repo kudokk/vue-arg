@@ -37,8 +37,7 @@ module.exports = {
                 options: { minimize: process.env.NODE_ENV === 'production' }
               },
               {
-                loader: 'sass-loader',
-                options: { indentedSyntax: true }
+                loader: 'sass-loader'
               }
             ],
             js: {
