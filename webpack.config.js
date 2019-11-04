@@ -1,5 +1,4 @@
 const path = require('path')
-const webpack = require("webpack");
 
 module.exports = {
   mode: process.env.NODE_ENV,
@@ -11,9 +10,9 @@ module.exports = {
   },
 
   output: {
-    path: `${__dirname}/dist/js/`,
+    path: path.join(__dirname, 'public'),
     filename: 'bundle.js',
-    publicPath: `${__dirname}/dist/`,
+    publicPath: '/js/',
   },
 
   resolve: {
@@ -80,9 +79,9 @@ module.exports = {
     ]
   },
 
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
+  devServer: {
+    contentBase: path.join(__dirname, 'public')
+  },
 
   devtool: process.env.NODE_ENV === 'development' ? 'source-map' : 'none'
 
