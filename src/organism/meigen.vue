@@ -1,16 +1,18 @@
 <template>
   <div class="meigen">
-    <h2 class="meigen__title">「北斗の拳」名言集</h2>
-    <p class="meigen__subTitle">見たい名言をクリック！</p>
+    <div class="meigen__titleWrap">
+      <h2 class="meigen__title">「北斗の拳」名言集</h2>
+      <p class="meigen__subTitle">見たい名言をクリック！</p>
+    </div>
     <MeigenButtonList
       :nameClassActiveList="meigenButtonObject"
       @emit-on-click="selectName" />
 
   <ul class="meigen__descList">
-    <li v-for="meigen in meigens"
-      class="meigen__desc"
-      v-bind:class='{ active: meigen.classActive }'>
-      {{ meigen.desc }}
+    <li v-for="meigen in isActiveMeigenList"
+      v-if="meigen.classActive"
+      class="meigen__desc">
+      {{ meigen.name }}  「{{ meigen.desc }}」
     </li>
   </ul>
   </div>
@@ -27,11 +29,11 @@ export default {
   data() {
     return {
       meigens: [
-        { name: 'ラオウ', desc: 'ラオウ「我が人生、一片の悔いなし！」', classActive: false},
-        { name: 'トキ', desc: 'トキ「愛するがゆえに見守る愛もある」', classActive: false},
-        { name: 'ジャギ', desc: 'ジャギ「俺の名前を言ってみろ！」', classActive: false},
-        { name: 'ケンシロウ', desc: 'ケンシロウ「お前はもう、死んでいる」', classActive: false},
-        { name: 'モヒカン', desc: 'モヒカン「あべし！」', classActive: false}
+        { name: 'ラオウ', desc: '我が人生、一片の悔いなし！', classActive: false},
+        { name: 'トキ', desc: '愛するがゆえに見守る愛もある', classActive: false},
+        { name: 'ジャギ', desc: '俺の名前を言ってみろ！', classActive: false},
+        { name: 'ケンシロウ', desc: 'お前はもう、死んでいる', classActive: false},
+        { name: 'モヒカン', desc: 'あべし！', classActive: false}
       ]
     }
   },
@@ -44,6 +46,10 @@ export default {
           classActive: it.classActive 
         }
       })
+    },
+
+    isActiveMeigenList () {
+      return this.meigens.filter((it) => it.classActive)
     }
   },
 
@@ -57,6 +63,17 @@ export default {
 
 <style lang="scss">
   .meigen {
+    &__titleWrap {
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    &__title {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
     &__buttonList {
       display: flex;
       justify-content: center;
@@ -76,6 +93,23 @@ export default {
 
       &.active {
         color: red;
+      }
+    }
+
+    &__descList {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    &__desc {
+      font-size: 18px;
+      width: 500px;
+
+      &:not(:last-of-type) {
+        margin-bottom: 5px;
       }
     }
   }
