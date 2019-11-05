@@ -2,8 +2,11 @@
   <div class="linda">
     <div class="linda__titleWrap">
       <h1 class="linda__title">Love Song</h1>
-      <p class="linda__desc">あなたの愛する人の名前を入れましょう。</p>
-      <input v-model="name" placeholder="名前" class="linda__input">
+      <InputText 
+        v-model="name"
+        title="あなたの愛する人の名前を入れましょう。"
+        class="linda__input"
+        placeholder="名前" />
       <h2>{{ name }} {{ name }}</h2>
     </div>
     <LindaLyric
@@ -14,9 +17,12 @@
 
 <script>
 import LindaLyric from '@/atom/lindaLyric'
+import InputText from '@/atom/inputText'
+
 export default {
   components: {
-    LindaLyric
+    LindaLyric,
+    InputText
   },
 
   data () {
