@@ -1,5 +1,5 @@
 <template>
-  <p class="linda__lyric">
+  <p>
     ドブネズミみたいに美しくなりたい<br>
     写真には写らない美しさがあるから<br>
     {{ name }}{{ name }} {{ name }}{{ name }}{{ name }}<br>

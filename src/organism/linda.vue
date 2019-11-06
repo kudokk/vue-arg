@@ -10,7 +10,8 @@
       <h2>{{ name }} {{ name }}</h2>
     </div>
     <LindaLyric
-      :name="name" />
+      :name="name"
+      class="linda__lyric" />
     <div class="linda__comment">※愛する人にこのラブソングを送りましょう。</div>
   </div>
 </template>
