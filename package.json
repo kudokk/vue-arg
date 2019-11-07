@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --hot",
-    "build-html": "cpx ./public/index.html ./dist",
+    "build-html": "cpx \"./public/**/*.{html,svg,ttf,woff,json}\" ./dist",
     "build-js": "webpack --config webpack.production.js",
     "build": "npm run build-html && npm run build-js"
   },

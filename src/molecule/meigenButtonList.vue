@@ -2,6 +2,7 @@
   <div class="meigen__buttonList">
     <RectButton
       v-for="(it, index) in nameClassActiveList"
+      :key="it.name"
       class="meigen__button"
       :class="{ active: it.classActive }"
       :text="it.name"

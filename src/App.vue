@@ -6,6 +6,7 @@
     <Warikan />
     <Sengokuquiz />
     <TonnyRoom />
+    <SakeNomi />
   </div>
 </template>
 
@@ -16,6 +17,7 @@ import Linda from '@/organism/linda'
 import Warikan from '@/organism/warikan'
 import Sengokuquiz from '@/organism/Sengokuquiz'
 import TonnyRoom from '@/organism/tonnyRoom'
+import SakeNomi from '@/organism/sakeNomi'
 
 export default {
   components: {
@@ -24,7 +26,8 @@ export default {
     Linda,
     Warikan,
     Sengokuquiz,
-    TonnyRoom
+    TonnyRoom,
+    SakeNomi
   }
 }
 </script>
