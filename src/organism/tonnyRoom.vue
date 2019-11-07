@@ -4,7 +4,7 @@
     <p>「あなたのお名前なんて〜の？」</p>
     <input type="text" class="tonny__input" v-model="name" placeholder="お名前">
     <transition>
-      <p v-if="name">「{{ name }}と申します！」</p>
+      <p v-if="name" class="tonny__mainText">「{{ name }}と申します！」</p>
     </transition>
 </div>
 </template>
@@ -35,6 +35,11 @@ export default {
       font-size: 14px;
       margin-top: 10px;
       height: 50px;
+    }
+
+    &__mainText {
+      font-size: 18px;
+      text-align: center;
     }
   }
 
