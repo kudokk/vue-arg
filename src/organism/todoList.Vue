@@ -1,14 +1,14 @@
 <template>
   <div class="todoList">
-    <header class="header">
-      <h1>todos</h1>
-      <input class="new-todo"
+    <header>
+      <h1 class="todoList__title">todos</h1>
+      <input class="todoList__input todoList__input--add"
         autofocus autocomplete="off"
         placeholder="What needs to be done?"
         v-model="newTodo"
         @keyup.enter="addTodo">
     </header>
-    <section class="main" v-show="todos.length" v-cloak>
+    <section class="todoList__main" v-show="todos.length">
       <input id="toggle-all" class="toggle-all" type="checkbox" v-model="allDone">
       <label for="toggle-all"></label>
       <ul class="todo-list">
@@ -21,7 +21,7 @@
             <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
             <button class="destroy" @click="removeTodo(todo)"></button>
           </div>
-          <input class="edit" type="text"
+          <input class="todoList__input todoList__input--edit" type="text"
             v-model="todo.title"
             v-todo-focus="todo == editedTodo"
             @blur="doneEdit(todo)"
@@ -30,7 +30,7 @@
         </li>
       </ul>
     </section>
-    <footer class="footer" v-show="todos.length" v-cloak>
+    <footer class="todoList__footer" v-show="todos.length">
       <span class="todo-count">
         <strong>{{ remaining }}</strong> {{ remaining | pluralize }} left
       </span>
@@ -163,6 +163,59 @@ export default {
 .todoList {
   margin: 40px auto 20px;
   width: 600px;
+
+  &__title {
+    font-size: 30px;
+    text-align: center;
+  }
+
+  &__main {
+    position: relative;
+    z-index: 2;
+    border-top: 1px solid #e6e6e6;
+    &::after {
+      content: '';
+      border-top: 1px solid #e6e6e6;
+      display: block;
+      height: 50px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
+                  0 8px 0 -3px #f6f6f6,
+                  0 9px 1px -3px rgba(0, 0, 0, 0.2),
+                  0 16px 0 -6px #f6f6f6,
+                  0 17px 2px -6px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  &__input {
+    position: relative;
+    margin: 0;
+    width: 100%;
+    font-size: 24px;
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: 1.4em;
+    color: inherit;
+    padding: 6px;
+    border: 1px solid #999;
+    box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    &--add {
+      padding: 16px 16px 16px 60px;
+      border: none;
+      background: rgba(0, 0, 0, 0.003);
+      box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
+    }
+    &--edit {
+      display: none;
+    }
+  }
+
+  &__footer {
+    color: #777;
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .hidden {
@@ -177,24 +230,6 @@ export default {
                 0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }
 
-.todoapp input::-webkit-input-placeholder {
-    font-style: italic;
-    font-weight: 300;
-    color: #e6e6e6;
-}
-
-.todoapp input::-moz-placeholder {
-    font-style: italic;
-    font-weight: 300;
-    color: #e6e6e6;
-}
-
-.todoapp input::input-placeholder {
-    font-style: italic;
-    font-weight: 300;
-    color: #e6e6e6;
-}
-
 .todoapp h1 {
     position: absolute;
     top: -155px;
@@ -206,38 +241,6 @@ export default {
     -webkit-text-rendering: optimizeLegibility;
     -moz-text-rendering: optimizeLegibility;
     text-rendering: optimizeLegibility;
-}
-
-.new-todo,
-.edit {
-    position: relative;
-    margin: 0;
-    width: 100%;
-    font-size: 24px;
-    font-family: inherit;
-    font-weight: inherit;
-    line-height: 1.4em;
-    border: 0;
-    color: inherit;
-    padding: 6px;
-    border: 1px solid #999;
-    box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.new-todo {
-    padding: 16px 16px 16px 60px;
-    border: none;
-    background: rgba(0, 0, 0, 0.003);
-    box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
-}
-
-.main {
-    position: relative;
-    z-index: 2;
-    border-top: 1px solid #e6e6e6;
 }
 
 .toggle-all {
@@ -376,30 +379,8 @@ export default {
     display: block;
 }
 
-.todo-list li .edit {
-    display: none;
-}
-
 .todo-list li.editing:last-child {
     margin-bottom: -1px;
-}
-
-.footer {
-    color: #777;
-    text-align: center;
-    border-top: 1px solid #e6e6e6;
-}
-
-.footer:before {
-    content: '';
-    display: block;
-    height: 50px;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
-                0 8px 0 -3px #f6f6f6,
-                0 9px 1px -3px rgba(0, 0, 0, 0.2),
-                0 16px 0 -6px #f6f6f6,
-                0 17px 2px -6px rgba(0, 0, 0, 0.2);
 }
 
 .todo-count strong {
