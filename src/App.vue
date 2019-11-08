@@ -1,18 +1,16 @@
 <template>
   <div id="app" class="page">
     <AppHeader />
-    <AppMain />
+    <router-view />
   </div>
 </template>
 
 <script>
 import AppHeader from '@/organism/appHeader'
-import AppMain from '@/page/appMain'
 
 export default {
   components: {
-    AppHeader,
-    AppMain
+    AppHeader
   }
 }
 </script>

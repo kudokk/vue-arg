@@ -9,7 +9,7 @@
     <div class="link">
       <ul class="link__list">
         <li v-for="link in links" class="link__item">
-          <a href="#" class="link__text">{{ link }}</a>
+          <a class="link__text" @click="transition(link)">{{ link }}</a>
         </li>
       </ul>
     </div>
@@ -17,13 +17,21 @@
 </template>
 
 <script>
+import { ROUTE_NAMES } from '@/router/names'
+
 export default {
   data () {
     return {
       links: [
-        'profile',
-        'learn'
+        ROUTE_NAMES.PROFILE,
+        ROUTE_NAMES.LEARN
       ]
+    }
+  },
+
+  methods: {
+    transition (link) {
+      this.$router.push({name: link})
     }
   }
 }
