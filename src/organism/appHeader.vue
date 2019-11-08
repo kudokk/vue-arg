@@ -2,7 +2,7 @@
   <div class="appHeader">
     <div class="appHeader__left">
       <div class="logo">
-        <img class="logo__img" src="/img/logo.png" height="30px" width="30px">
+        <img class="logo__img" src="img/logo.png" height="30px" width="30px">
       </div>
       <span class="appHeader__title">kk</span>
     </div>
