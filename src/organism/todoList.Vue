@@ -9,17 +9,17 @@
         @keyup.enter="addTodo">
     </header>
     <section class="todoList__main" v-show="todos.length">
-      <input id="toggle-all" class="toggle-all" type="checkbox" v-model="allDone">
-      <label for="toggle-all"></label>
-      <ul class="todo-list">
+      <input id="toggle-all" class="toggleAllBtn" type="checkbox" v-model="allDone">
+      <label for="toggle-all" class="toggleAllBtn toggleAllBtn--label"></label>
+      <ul class="todoList__list">
         <li v-for="todo in filteredTodos"
-          class="todo"
+          class="todoList__item"
           :key="todo.id"
           :class="{ completed: todo.completed, editing: todo == editedTodo }">
           <div class="view">
             <input class="toggle" type="checkbox" v-model="todo.completed">
             <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
-            <button class="destroy" @click="removeTodo(todo)"></button>
+            <button class="deleteBtn" @click="removeTodo(todo)"></button>
           </div>
           <input class="todoList__input todoList__input--edit" type="text"
             v-model="todo.title"
@@ -35,9 +35,15 @@
         <strong>{{ remaining }}</strong> {{ remaining | pluralize }} left
       </span>
       <ul class="filters">
-        <li><a href="#/all" :class="{ selected: visibility == 'all' }">All</a></li>
-        <li><a href="#/active" :class="{ selected: visibility == 'active' }">Active</a></li>
-        <li><a href="#/completed" :class="{ selected: visibility == 'completed' }">Completed</a></li>
+        <li>
+          <a href="#/all" :class="{ selected: visibility == 'all' }">All</a>
+        </li>
+        <li>
+          <a href="#/active" :class="{ selected: visibility == 'active' }">Active</a>
+        </li>
+        <li>
+          <a href="#/completed" :class="{ selected: visibility == 'completed' }">Completed</a>
+        </li>
       </ul>
       <button class="clear-completed" @click="removeCompleted" v-show="todos.length > remaining">
         Clear completed
@@ -47,59 +53,76 @@
 </template>
 
 <script>
-var STORAGE_KEY = 'todos-vuejs-2.0'
-var todoStorage = {
-  fetch: function () {
-    var todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
-    todos.forEach(function (todo, index) {
-      todo.id = index
-    })
-    todoStorage.uid = todos.length
-    return todos
-  },
-  save: function (todos) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
-  }
-}
+const STORAGE_KEY = 'todos-vuejs-2.0'
+const todoStorage = {}
 
 var filters = {
-  all: function (todos) {
+  all (todos) {
     return todos
   },
-  active: function (todos) {
+  active (todos) {
     return todos.filter(function (todo) {
       return !todo.completed
     })
   },
-  completed: function (todos) {
+  completed (todos) {
     return todos.filter(function (todo) {
       return todo.completed
     })
   }
 }
 
+const onHashChange = () => {
+  const visibility = window.location.hash.replace(/#\/?/, '')
+  if (filters[visibility]) {
+    app.visibility = visibility
+  } else {
+    window.location.hash = ''
+    app.visibility = 'all'
+  }
+}
+
+window.addEventListener('hashchange', onHashChange)
+onHashChange()
+
 export default {
   data () {
     return {
-      todos: todoStorage.fetch(),
+      todos: (() => { // 即時関数であればメソッドを定義できる
+        const todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]')
+        todos.forEach(function (todo, index) {
+          todo.id = index
+        })
+        todoStorage.uid = todos.length
+        return todos
+      })(),
       newTodo: '',
       editedTodo: null,
       visibility: 'all'
     }
   },
 
+  watch: {
+    todos: {
+      handler (todos) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(todos))
+      },
+      deep: true
+    }
+  },
+
   computed: {
-    filteredTodos: function () {
+    filteredTodos () {
       return filters[this.visibility](this.todos)
     },
-    remaining: function () {
+    remaining () {
       return filters.active(this.todos).length
     },
     allDone: {
-      get: function () {
+      get () {
         return this.remaining === 0
       },
-      set: function (value) {
+      set (value) {
         this.todos.forEach(function (todo) {
           todo.completed = value
         })
@@ -108,13 +131,13 @@ export default {
   },
 
   filters: {
-    pluralize: function (n) {
+    pluralize (n) {
       return n === 1 ? 'item' : 'items'
     }
   },
 
   methods: {
-    addTodo: function () {
+    addTodo () {
       var value = this.newTodo && this.newTodo.trim()
       if (!value) {
         return
@@ -127,16 +150,16 @@ export default {
       this.newTodo = ''
     },
 
-    removeTodo: function (todo) {
+    removeTodo (todo) {
       this.todos.splice(this.todos.indexOf(todo), 1)
     },
 
-    editTodo: function (todo) {
+    editTodo (todo) {
       this.beforeEditCache = todo.title
       this.editedTodo = todo
     },
 
-    doneEdit: function (todo) {
+    doneEdit (todo) {
       if (!this.editedTodo) {
         return
       }
@@ -147,15 +170,23 @@ export default {
       }
     },
 
-    cancelEdit: function (todo) {
+    cancelEdit (todo) {
       this.editedTodo = null
       todo.title = this.beforeEditCache
     },
 
-    removeCompleted: function () {
+    removeCompleted () {
       this.todos = filters.active(this.todos)
     }
   },
+
+  directives: {
+    'todo-focus': function (el, binding) {
+      if (binding.value) {
+        el.focus()
+      }
+    }
+  }
 }
 </script>
 
@@ -173,6 +204,7 @@ export default {
     position: relative;
     z-index: 2;
     border-top: 1px solid #e6e6e6;
+
     &::after {
       content: '';
       border-top: 1px solid #e6e6e6;
@@ -200,14 +232,25 @@ export default {
     border: 1px solid #999;
     box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
+
     &--add {
       padding: 16px 16px 16px 60px;
       border: none;
       background: rgba(0, 0, 0, 0.003);
       box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
     }
+
     &--edit {
       display: none;
+    }
+  }
+
+  &__item {
+    position: relative;
+    font-size: 24px;
+    border-bottom: 1px solid #ededed;
+    &:last-child {
+      border-bottom: none;
     }
   }
 
@@ -218,96 +261,82 @@ export default {
   }
 }
 
-.hidden {
-    display: none;
+.deleteBtn {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  margin: auto 0;
+  font-size: 30px;
+  color: #cc9a9a;
+  margin-bottom: 11px;
+  transition: color 0.2s ease-out;
+
+  &:hover {
+    color: #af5b5e;
+  }
+
+  &::after {
+    content: '×';
+  }
 }
 
-.todoapp {
-    background: #fff;
-    margin: 130px 0 40px 0;
-    position: relative;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
-                0 25px 50px 0 rgba(0, 0, 0, 0.1);
-}
+.toggleAllBtn {
+  width: 1px;
+  height: 1px;
+  border: none; /* Mobile Safari */
+  opacity: 0;
+  position: absolute;
+  right: 100%;
+  bottom: 100%;
 
-.todoapp h1 {
-    position: absolute;
-    top: -155px;
-    width: 100%;
-    font-size: 100px;
-    font-weight: 100;
-    text-align: center;
-    color: rgba(175, 47, 47, 0.15);
-    -webkit-text-rendering: optimizeLegibility;
-    -moz-text-rendering: optimizeLegibility;
-    text-rendering: optimizeLegibility;
-}
+  &:checked {
+    .toggleAllBtn--label {
+      &::before {
+        color: #737373;
+      }
+    }
+  }
 
-.toggle-all {
-    width: 1px;
-    height: 1px;
-    border: none; /* Mobile Safari */
-    opacity: 0;
-    position: absolute;
-    right: 100%;
-    bottom: 100%;
-}
-
-.toggle-all + label {
+  &--label {
     width: 60px;
     height: 34px;
     font-size: 0;
+    opacity: 1;
     position: absolute;
     top: -52px;
     left: -13px;
-    -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
+
+    &::before {
+      content: '❯';
+      font-size: 22px;
+      color: #e6e6e6;
+      padding: 10px 27px 10px 27px;
+    }
+  }
 }
 
-.toggle-all + label:before {
-    content: '❯';
-    font-size: 22px;
-    color: #e6e6e6;
-    padding: 10px 27px 10px 27px;
-}
-
-.toggle-all:checked + label:before {
-    color: #737373;
-}
-
-.todo-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.todo-list li {
-    position: relative;
-    font-size: 24px;
-    border-bottom: 1px solid #ededed;
-}
-
-.todo-list li:last-child {
-    border-bottom: none;
-}
-
-.todo-list li.editing {
+.todoList__list li.editing {
     border-bottom: none;
     padding: 0;
 }
 
-.todo-list li.editing .edit {
+.todoList__list li.editing .edit {
     display: block;
     width: calc(100% - 43px);
     padding: 12px 16px;
     margin: 0 0 0 43px;
 }
 
-.todo-list li.editing .view {
+.todoList__list li.editing .view {
     display: none;
 }
 
-.todo-list li .toggle {
+.todoList__list li .toggle {
     text-align: center;
     width: 40px;
     /* auto, since non-WebKit browsers doesn't support input styling */
@@ -321,11 +350,11 @@ export default {
     appearance: none;
 }
 
-.todo-list li .toggle {
+.todoList__list li .toggle {
     opacity: 0;
 }
 
-.todo-list li .toggle + label {
+.todoList__list li .toggle + label {
     /*
         Firefox requires `#` to be escaped - https://bugzilla.mozilla.org/show_bug.cgi?id=922433
         IE and Edge requires *everything* to be escaped to render, so we do that instead of just the `#` - https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/7157459/
@@ -335,11 +364,11 @@ export default {
     background-position: center left;
 }
 
-.todo-list li .toggle:checked + label {
+.todoList__list li .toggle:checked + label {
     background-image: url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%22-10%20-18%20100%20135%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2250%22%20fill%3D%22none%22%20stroke%3D%22%23bddad5%22%20stroke-width%3D%223%22/%3E%3Cpath%20fill%3D%22%235dc2af%22%20d%3D%22M72%2025L42%2071%2027%2056l-4%204%2020%2020%2034-52z%22/%3E%3C/svg%3E');
 }
 
-.todo-list li label {
+.todoList__list li label {
     word-break: break-all;
     padding: 15px 15px 15px 60px;
     display: block;
@@ -347,39 +376,16 @@ export default {
     transition: color 0.4s;
 }
 
-.todo-list li.completed label {
+.todoList__list li.completed label {
     color: #d9d9d9;
     text-decoration: line-through;
 }
 
-.todo-list li .destroy {
-    display: none;
-    position: absolute;
-    top: 0;
-    right: 10px;
-    bottom: 0;
-    width: 40px;
-    height: 40px;
-    margin: auto 0;
-    font-size: 30px;
-    color: #cc9a9a;
-    margin-bottom: 11px;
-    transition: color 0.2s ease-out;
-}
-
-.todo-list li .destroy:hover {
-    color: #af5b5e;
-}
-
-.todo-list li .destroy:after {
-    content: '×';
-}
-
-.todo-list li:hover .destroy {
+.todoList__list li:hover .deleteBtn {
     display: block;
 }
 
-.todo-list li.editing:last-child {
+.todoList__list li.editing:last-child {
     margin-bottom: -1px;
 }
 
@@ -409,7 +415,7 @@ export default {
 }
 
 .clear-completed,
-html .clear-completed:active {
+.clear-completed:active, {
     float: right;
     position: relative;
     line-height: 20px;
@@ -418,28 +424,6 @@ html .clear-completed:active {
 }
 
 .clear-completed:hover {
-    text-decoration: underline;
-}
-
-.info {
-    margin: 65px auto 0;
-    color: #bfbfbf;
-    font-size: 10px;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-    text-align: center;
-}
-
-.info p {
-    line-height: 1;
-}
-
-.info a {
-    color: inherit;
-    text-decoration: none;
-    font-weight: 400;
-}
-
-.info a:hover {
     text-decoration: underline;
 }
 </style>
