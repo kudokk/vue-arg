@@ -1,37 +1,26 @@
 <template>
-  <div id="app">
-    <TodoList />
-    <Meigen />
-    <Linda />
-    <Warikan />
-    <Sengokuquiz />
-    <TonnyRoom />
-    <SakeNomi />
+  <div id="app" class="page">
+    <AppHeader />
+    <AppMain />
   </div>
 </template>
 
 <script>
-import TodoList from '@/organism/todoList'
-import Meigen from '@/organism/meigen'
-import Linda from '@/organism/linda'
-import Warikan from '@/organism/warikan'
-import Sengokuquiz from '@/organism/Sengokuquiz'
-import TonnyRoom from '@/organism/tonnyRoom'
-import SakeNomi from '@/organism/sakeNomi'
+import AppHeader from '@/organism/appHeader'
+import AppMain from '@/page/appMain'
 
 export default {
   components: {
-    TodoList,
-    Meigen,
-    Linda,
-    Warikan,
-    Sengokuquiz,
-    TonnyRoom,
-    SakeNomi
+    AppHeader,
+    AppMain
   }
 }
 </script>
 
 <style lang="scss">
-  @import "@/style/reset"
+  @import "@/style/reset";
+
+  .page {
+    padding-top: 50px;
+  }
 </style>
