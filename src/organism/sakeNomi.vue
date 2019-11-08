@@ -21,7 +21,7 @@ export default {
   },
 
   async created () {
-    await axios.get('/json/sakeNomi.json')
+    await axios.get('json/sakeNomi.json')
       .then(response => {
         const res = response.data
         this.title = res.title
