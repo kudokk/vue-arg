@@ -4,6 +4,14 @@ import { ROUTE_NAMES } from './names'
 // page
 import Profile from '@/page/profile'
 import Learn from '@/page/learn'
+// Lean
+import TodoList from '@/organism/todoList'
+import Meigen from '@/organism/meigen'
+import Linda from '@/organism/linda'
+import Warikan from '@/organism/warikan'
+import Sengoku from '@/organism/sengokuquiz'
+import Tonny from '@/organism/tonnyRoom'
+import Sakenomi from '@/organism/sakeNomi'
 
 Vue.use(Router)
 
@@ -35,7 +43,44 @@ export default new Router({
       beforeEnter: (to, from, next) => {
         console.log('route(home):beforeEnter');
         next();
-      }
+      },
+      children: [
+        {
+          path: 'todo',
+          name: ROUTE_NAMES.TODOLIST,
+          component: TodoList
+        },
+        {
+          path: 'meigen',
+          name: ROUTE_NAMES.MEIGEN,
+          component: Meigen
+        },
+        {
+          path: 'linda',
+          name: ROUTE_NAMES.LINDA,
+          component: Linda
+        },
+        {
+          path: 'warikan',
+          name: ROUTE_NAMES.WARIKAN,
+          component: Warikan
+        },
+        {
+          path: 'sengoku',
+          name: ROUTE_NAMES.SENGOKU,
+          component: Sengoku
+        },
+        {
+          path: 'tonny',
+          name: ROUTE_NAMES.TONNY,
+          component: Tonny
+        },
+        {
+          path: 'sakenomi',
+          name: ROUTE_NAMES.SAKENOMI,
+          component: Sakenomi
+        }
+      ]
     }
   ]
 })

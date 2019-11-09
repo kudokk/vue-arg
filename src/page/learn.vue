@@ -1,5 +1,6 @@
 <template>
   <div>
+    <TodoList/>
     <Meigen />
     <Linda />
     <Warikan />
@@ -14,7 +15,7 @@ import TodoList from '@/organism/todoList'
 import Meigen from '@/organism/meigen'
 import Linda from '@/organism/linda'
 import Warikan from '@/organism/warikan'
-import Sengokuquiz from '@/organism/Sengokuquiz'
+import Sengokuquiz from '@/organism/sengokuquiz'
 import TonnyRoom from '@/organism/tonnyRoom'
 import SakeNomi from '@/organism/sakeNomi'
 

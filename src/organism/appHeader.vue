@@ -9,7 +9,20 @@
     <div class="link">
       <ul class="link__list">
         <li v-for="link in links" class="link__item">
-          <a class="link__text" @click="transition(link)">{{ link }}</a>
+          <div class="link__dropdownWrapper">
+            <a class="link__text"
+              @click="transition(link)"
+              @mouseenter="openDropdown(link)"
+              @mouseleave="closeDropdown(link)">
+              {{ link }}
+          </a>
+          <Dropdown
+              v-if="isDropdownActive(link)"
+              class="link__dropdown"
+              :list="getDropdownList(link)"
+              @mouseenter.native="openDropdown(link)"
+              @mouseleave.native="closeDropdown(link)"/>
+          </div>
         </li>
       </ul>
     </div>
@@ -18,20 +31,59 @@
 
 <script>
 import { ROUTE_NAMES } from '@/router/names'
+import { ROUTE_NAME_LAYERS } from '@/router/route-name-layers'
+
+import Dropdown from '@/molecule/dialog/dropdown'
 
 export default {
+  components: {
+    Dropdown
+  },
+
   data () {
     return {
       links: [
         ROUTE_NAMES.PROFILE,
         ROUTE_NAMES.LEARN
-      ]
+      ],
+      dropdownList: (() => {
+        const LEARN = ROUTE_NAMES.LEARN
+        const PROFILE = ROUTE_NAMES.PROFILE
+        const obj = {}
+        obj[LEARN] = ROUTE_NAME_LAYERS.LEARN
+        obj[PROFILE] = []
+        return obj
+      })(),
+      dropdownActive: (() => {
+        const LEARN = ROUTE_NAMES.LEARN
+        const PROFILE = ROUTE_NAMES.PROFILE
+        const obj = {}
+        obj[LEARN] = false
+        obj[PROFILE] = false
+        return obj
+      })()
     }
   },
 
   methods: {
     transition (link) {
       this.$router.push({name: link})
+    },
+
+    openDropdown (link) {
+      this.dropdownActive[link] = true
+    },
+
+    closeDropdown (link) {
+      this.dropdownActive[link] = false
+    },
+
+    isDropdownActive (link) {
+      return this.dropdownActive[link]
+    },
+
+    getDropdownList (link) {
+      return this.dropdownList[link]
     }
   }
 }
@@ -48,6 +100,7 @@ export default {
     left: 0;
     height: 50px;
     width: 100%;
+    z-index: 3;
 
     &__left {
       display: flex;
@@ -73,17 +126,31 @@ export default {
     &__list {
       display: flex;
       margin-right: 100px;
+      width: 200px;
     }
 
     &__item {
+      display: flex;
+      position: relative;
       margin-right: 80px;
+      margin-top: -25px;
+      width: 100px;
+    }
+
+    &__dropdownWrapper {
+      position: absolute;
+      width: 100px;
     }
 
     &__text {
       cursor: pointer;
       color: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 18px;
       text-decoration: none;
+      height: 50px;
 
       &:hover {
         text-decoration: underline;
