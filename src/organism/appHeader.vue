@@ -9,19 +9,19 @@
     <div class="link">
       <ul class="link__list">
         <li v-for="link in links" class="link__item">
-          <div class="link__dropdownWrapper">
+          <div class="link__dropdownWrapper"
+            @mouseenter="openDropdown(link)"
+            @mouseleave="closeDropdown(link)">
             <a class="link__text"
-              @click="transition(link)"
-              @mouseenter="openDropdown(link)"
-              @mouseleave="closeDropdown(link)">
+              @click="transition(link)">
               {{ link }}
-          </a>
-          <Dropdown
-              v-if="isDropdownActive(link)"
-              class="link__dropdown"
-              :list="getDropdownList(link)"
-              @mouseenter.native="openDropdown(link)"
-              @mouseleave.native="closeDropdown(link)"/>
+            </a>
+            <transition name="slide-fade">
+              <Dropdown
+                v-if="isDropdownActive(link)"
+                class="link__dropdown"
+                :list="getDropdownList(link)" />
+            </transition>
           </div>
         </li>
       </ul>
@@ -155,6 +155,26 @@ export default {
       &:hover {
         text-decoration: underline;
       }
+    }
+  }
+
+  .slide-fade {
+    &-enter-active {
+      transition: all .3s ease;
+    }
+
+    &-leave-active {
+      transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+
+    &-enter {
+      transform: translateX(10px);
+      opacity: 0;
+    }
+
+    &-leave-to {
+      transform: translateX(10px);
+      opacity: 0;
     }
   }
 </style>
