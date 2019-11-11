@@ -4,7 +4,8 @@
       <li v-for="item in list" class="dropdown__item">
         <TileButton 
           class="dropdown__button"
-          :text="item" />
+          :text="item"
+          @emit-on-click="clicked($event, item)" />
       </li>
     </ul>
   </div>
@@ -22,6 +23,12 @@ export default {
     list: {
       type: Array,
       required: true
+    }
+  },
+
+  methods: {
+    clicked (ev, item) {
+      this.$emit('emit-on-click', item)
     }
   }
 }

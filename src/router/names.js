@@ -2,13 +2,15 @@ export const ROUTE_NAMES = Object.freeze({
   ROOT: 'root',
   PROFILE: 'profile',
   LEARN: 'learn',
-  TODOLIST: 'todolist',
-  MEIGEN: 'meigen',
-  LINDA: 'linda',
-  WARIKAN: 'warikan',
-  SENGOKU: 'sengoku',
-  TONNY: 'tonny',
-  SAKENOMI: 'sakenomi',
+  // SPIDER
+  SPIDER: 'spider',
+  TODOLIST: 'spider/todolist',
+  MEIGEN: 'spider/meigen',
+  LINDA: 'spider/linda',
+  WARIKAN: 'spider/warikan',
+  SENGOKU: 'spider/sengoku',
+  TONNY: 'spider/tonny',
+  SAKENOMI: 'spider/sakenomi',
   // エラーページ
   ERROR: 'error'
 })

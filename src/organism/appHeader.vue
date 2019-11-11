@@ -2,7 +2,7 @@
   <div class="appHeader">
     <div class="appHeader__left">
       <div class="logo">
-        <img class="logo__img" src="img/logo.png" height="30px" width="30px">
+        <img class="logo__img" src="/img/logo.png" height="30px" width="30px">
       </div>
       <span class="appHeader__title">kk</span>
     </div>
@@ -20,7 +20,8 @@
               <Dropdown
                 v-if="isDropdownActive(link)"
                 class="link__dropdown"
-                :list="getDropdownList(link)" />
+                :list="getDropdownList(link)"
+                @emit-on-click="clicked" />
             </transition>
           </div>
         </li>
@@ -50,7 +51,7 @@ export default {
         const LEARN = ROUTE_NAMES.LEARN
         const PROFILE = ROUTE_NAMES.PROFILE
         const obj = {}
-        obj[LEARN] = ROUTE_NAME_LAYERS.LEARN
+        obj[LEARN] = ROUTE_NAME_LAYERS.LEARN.SPIDER
         obj[PROFILE] = []
         return obj
       })(),
@@ -84,6 +85,11 @@ export default {
 
     getDropdownList (link) {
       return this.dropdownList[link]
+    },
+
+    clicked (item) {
+      console.log(item)
+      this.$router.push({name: item})
     }
   }
 }

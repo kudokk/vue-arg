@@ -1,5 +1,5 @@
 <template>
-  <div class="tileButton">
+  <div class="tileButton" @click="onClicked">
     {{ text }}
   </div>
 </template>
@@ -10,6 +10,12 @@ export default {
     text: {
       type: String,
       required: true
+    }
+  },
+
+  methods: {
+    onClicked () {
+      this.$emit('emit-on-click')
     }
   }
 }
