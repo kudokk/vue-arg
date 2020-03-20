@@ -23,9 +23,11 @@ export default {
 
 <style lang="scss">
   .tileButton {
+    background-color: #eee;
     color: #000;
     padding-top: 10px;
     padding-bottom: 10px;
+    width: 100%;
 
     &:hover {
       opacity: .5;

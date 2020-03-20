@@ -39,20 +39,16 @@ export default {
     text-align: left;
 
     &__list {
-      background-color: #eee;
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
       cursor: pointer;
     }
 
-    &__item {
-      &:not(:last-of-type) {
-        border-bottom: 1px solid #ccc;
-      }
-    }
-
     &__button {
-      margin-left: 12px;
+      padding-left: 12px;
+    }
+    &:not(:last-of-type) {
+      border-bottom: 1px solid #ccc;
     }
   }
 </style>
