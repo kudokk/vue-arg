@@ -4,13 +4,13 @@ export const ROUTE_NAMES = Object.freeze({
   LEARN: 'learn',
   // SPIDER
   SPIDER: 'spider',
-  TODOLIST: 'spider/todolist',
-  MEIGEN: 'spider/meigen',
-  LINDA: 'spider/linda',
-  WARIKAN: 'spider/warikan',
-  SENGOKU: 'spider/sengoku',
-  TONNY: 'spider/tonny',
-  SAKENOMI: 'spider/sakenomi',
+  TODOLIST: 'todolist',
+  MEIGEN: 'meigen',
+  LINDA: 'linda',
+  WARIKAN: 'warikan',
+  SENGOKU: 'sengoku',
+  TONNY: 'tonny',
+  SAKENOMI: 'sakenomi',
   // エラーページ
   ERROR: 'error'
 })

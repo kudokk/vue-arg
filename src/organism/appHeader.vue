@@ -16,12 +16,12 @@
             {{ link }}
           </a>
           <transition name="slide-fade">
-            <Dropdown
+            <HasStepDropdown
               v-if="isDropdownActive(link)"
               @mouseover="openDropdown(link)"
               @mouseleave="closeDropdown(link)"
               class="link__dropdown"
-              :list="getDropdownList(link)"
+              :stepMap="getDropdownList(link)"
               @emit-on-click="clicked" />
           </transition>
         </div>
@@ -34,11 +34,11 @@
 import { ROUTE_NAMES } from '@/router/names'
 import { ROUTE_NAME_LAYERS } from '@/router/route-name-layers'
 
-import Dropdown from '@/molecule/dialog/dropdown'
+import HasStepDropdown from '@/molecule/dialog/HasStepDropdown'
 
 export default {
   components: {
-    Dropdown
+    HasStepDropdown
   },
 
   data () {
@@ -51,7 +51,7 @@ export default {
         const LEARN = ROUTE_NAMES.LEARN
         const PROFILE = ROUTE_NAMES.PROFILE
         const obj = {}
-        obj[LEARN] = ROUTE_NAME_LAYERS.LEARN.SPIDER
+        obj[LEARN] = ROUTE_NAME_LAYERS.LEARN
         obj[PROFILE] = []
         return obj
       })(),
@@ -59,8 +59,8 @@ export default {
         const LEARN = ROUTE_NAMES.LEARN
         const PROFILE = ROUTE_NAMES.PROFILE
         const obj = {}
-        obj[LEARN] = true
-        obj[PROFILE] = true
+        obj[LEARN] = false
+        obj[PROFILE] = false
         return obj
       })()
     }
@@ -72,7 +72,6 @@ export default {
     },
 
     openDropdown (link) {
-      console.log(link)
       this.dropdownActive[link] = true
     },
 
@@ -95,7 +94,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .appHeader {
   background-color: #41B883;
   display: flex;
