@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server --hot",
     "build-html": "cpx \"./public/**/*.{html,svg,ttf,woff,png,json}\" ./dist",
-    "build-js": "ROOT_BASE=/vue-arg/dist/ webpack --config webpack.production.js",
+    "build-js": "webpack --config webpack.production.js",
     "build": "npm run build-html && npm run build-js"
   },
   "author": "",
