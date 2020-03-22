@@ -48,11 +48,9 @@ export default {
         ROUTE_NAMES.LEARN
       ],
       dropdownList: (() => {
-        const LEARN = ROUTE_NAMES.LEARN
-        const PROFILE = ROUTE_NAMES.PROFILE
         const obj = {}
-        obj[LEARN] = ROUTE_NAME_LAYERS.LEARN
-        obj[PROFILE] = []
+        obj[ROUTE_NAMES.LEARN] = ROUTE_NAME_LAYERS.LEARN
+        obj[ROUTE_NAMES.PROFILE] = ROUTE_NAME_LAYERS.PROFILE
         return obj
       })(),
       dropdownActive: (() => {

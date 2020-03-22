@@ -1,5 +1,12 @@
 import { ROUTE_NAMES } from '@/router/names.js'
 
+const carrerArray = (() => {
+  return [
+    ROUTE_NAMES.COMPANY,
+    ROUTE_NAMES.TECH
+  ]
+})()
+
 const spiderArray = (() => {
   return [
     ROUTE_NAMES.TODOLIST,
@@ -14,6 +21,12 @@ const spiderArray = (() => {
 
 export const ROUTE_NAME_LAYERS = Object.freeze({
   // トップの階層に属するルート名
+  PROFILE: (() => {
+    const obj = {}
+    obj[ROUTE_NAMES.CARRER] = carrerArray
+    return obj
+  })(),
+
   LEARN: (() => {
     const obj = {}
     obj[ROUTE_NAMES.SPIDER] = spiderArray

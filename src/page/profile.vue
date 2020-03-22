@@ -1,11 +1,17 @@
 <template>
   <div>
     profile
+    <Carrer />
   </div>
 </template>
 
 <script>
+import Carrer from '@/page/profile/carrer'
+
 export default {
+  components: {
+    Carrer
+  },
   created () {
     console.log('a')
   },

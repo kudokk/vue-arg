@@ -4,8 +4,12 @@ import { ROUTE_NAMES } from './names'
 import ChildrenAll from '@/router/childrenAll'
 // page
 import Profile from '@/page/profile'
+import Carrer from '@/page/profile/carrer'
 import Learn from '@/page/learn'
 import Spider from '@/page/learn/spider'
+// Profile
+import Company from '@/organism/company'
+
 // Lean
 import TodoList from '@/organism/todoList'
 import Meigen from '@/organism/meigen'
@@ -37,7 +41,31 @@ export default new Router({
       beforeEnter: (to, from, next) => {
         console.log('route(home):beforeEnter');
         next();
-      }
+      },
+      children: [
+        {
+          path: '',
+          name: ROUTE_NAMES.LEARN,
+          component: Learn,
+        },
+        {
+          path: 'carrer',
+          name: ROUTE_NAMES.CARRER,
+          component: Carrer,
+          children: [
+            {
+              path: '',
+              name: ROUTE_NAMES.LEARN,
+              component: Learn,
+            },
+            {
+              path: 'company',
+              name: ROUTE_NAMES.COMPANY,
+              component: Company
+            }
+          ]
+        }
+      ]
     },
     {
       path: '/learn',
