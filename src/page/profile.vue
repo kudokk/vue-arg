@@ -1,6 +1,5 @@
 <template>
   <div>
-    profile
     <Carrer />
   </div>
 </template>
