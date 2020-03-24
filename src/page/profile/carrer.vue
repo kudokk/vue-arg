@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Company from '@/organism/company'
+import Company from '@/organism/profile/company'
 
 export default {
   components: {

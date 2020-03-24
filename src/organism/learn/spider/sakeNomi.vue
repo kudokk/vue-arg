@@ -2,7 +2,7 @@
   <div class="sakeNomi">
     <h1 class="sakeNomi__title">{{ title }}</h1>
     <ul class="sakeNomi__list">
-        <li v-for="(value, index) in sake" class="sakeNomi__item">
+        <li v-for="(value, index) in sake" :key="value" class="sakeNomi__item">
         {{ index +1 }}月は、<span class="sakeNomi__monthlyValue">{{ value }}</span> 酒が飲めるぞ
       </li>
     </ul>

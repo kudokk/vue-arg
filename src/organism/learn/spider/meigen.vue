@@ -10,6 +10,7 @@
 
   <ul class="meigen__descList">
     <li v-for="meigen in isActiveMeigenList"
+      :key="meigen.name"
       v-if="meigen.classActive"
       class="meigen__desc">
       {{ meigen.name }}  「{{ meigen.desc }}」

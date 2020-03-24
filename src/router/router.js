@@ -8,16 +8,16 @@ import Carrer from '@/page/profile/carrer'
 import Learn from '@/page/learn'
 import Spider from '@/page/learn/spider'
 // Profile
-import Company from '@/organism/company'
+import Company from '@/organism/profile/company'
 
 // Lean
-import TodoList from '@/organism/todoList'
-import Meigen from '@/organism/meigen'
-import Linda from '@/organism/linda'
-import Warikan from '@/organism/warikan'
-import Sengoku from '@/organism/sengokuquiz'
-import Tonny from '@/organism/tonnyRoom'
-import Sakenomi from '@/organism/sakeNomi'
+import TodoList from '@/organism/learn/spider/todoList'
+import Meigen from '@/organism/learn/spider/meigen'
+import Linda from '@/organism/learn/spider/linda'
+import Warikan from '@/organism/learn/spider/warikan'
+import Sengoku from '@/organism/learn/spider/sengokuquiz'
+import Tonny from '@/organism/learn/spider/tonnyRoom'
+import Sakenomi from '@/organism/learn/spider/sakeNomi'
 
 Vue.use(Router)
 
