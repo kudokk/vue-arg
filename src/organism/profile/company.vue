@@ -2,8 +2,14 @@
   <div class="company">
     <section class="profileCard">
       <div class="profileCard__term">2017年04月: 新卒入社</div>
-      <div class="profileCard__company">社名: 株式会社ぐるなび</div>
-      <div class="profileCard__jobName">職種: フロントエンドエンジニア</div>
+      <div class="profileCard__label">
+        <div class="profileCard__labelInner">
+          <div>
+            <div class="profileCard__company">社名: 株式会社ぐるなび</div>
+            <div class="profileCard__jobName">職種: フロントエンドエンジニア</div>
+          </div>
+        </div>
+      </div>
       <div class="profileCard__descArea">
         <div class="profileCard__descTitle">複数サービスのフロントエンドを担当。主にSP版検索結果画面を担当</div>
         <div class="profileCard__descTitle">HTML, CSS, jQueryによる基本的なマークアップとVue.jsによるSPA開発を行う</div>
@@ -14,8 +20,14 @@
     </section>
     <section class="profileCard" @click="test()">
       <div class="profileCard__term">2019年08月: 中途入社</div>
-      <div class="profileCard__company">社名: 株式会社BlueStar</div>
-      <div class="profileCard__jobName">職種: フロントエンドエンジニア</div>
+      <div class="profileCard__label">
+        <div class="profileCard__labelInner">
+          <div>
+            <div class="profileCard__company">社名: 株式会社BlueStar</div>
+            <div class="profileCard__jobName">職種: フロントエンドエンジニア</div>
+          </div>
+        </div>
+      </div>
       <div class="profileCard__descArea">
         <div class="profileCard__descTitle">広告配信プラットフォームサービスのフロントエンドを担当。</div>
         <div class="profileCard__descTitle">UI設計とVue.jsによるSPA開発に専念。</div>
@@ -97,11 +109,23 @@ export default {
     padding-right: 10px;
     margin-bottom: 10px;
   }
-  &__company {
+  &__label {
     width: 100%;
   }
-  &__jobName {
-    width: 100%;
+  &__labelInner {
+    background-color: #c6e9d9;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    width: 400px;
+    &::before {
+      background-color: #41B883;
+      content: '';
+      display: block;
+      margin-right: 10px;
+      height: 100%;
+      width: 10px;
+    }
   }
   &__descArea {
     margin-top: 20px;
