@@ -9,6 +9,7 @@ import Learn from '@/page/learn'
 import Spider from '@/page/learn/spider'
 // Profile
 import Company from '@/organism/profile/company'
+import Tech from '@/organism/profile/tech'
 
 // Lean
 import TodoList from '@/organism/learn/spider/todoList'
@@ -37,7 +38,7 @@ export default new Router({
     {
       path: '/profile',
       name: ROUTE_NAMES.PROFILE,
-      component: Profile,
+      component: ChildrenAll,
       beforeEnter: (to, from, next) => {
         console.log('route(home):beforeEnter');
         next();
@@ -45,23 +46,28 @@ export default new Router({
       children: [
         {
           path: '',
-          name: ROUTE_NAMES.LEARN,
-          component: Learn,
+          name: ROUTE_NAMES.PROFILE,
+          component: Profile,
         },
         {
           path: 'carrer',
           name: ROUTE_NAMES.CARRER,
-          component: Carrer,
+          component: ChildrenAll,
           children: [
             {
               path: '',
-              name: ROUTE_NAMES.LEARN,
-              component: Learn,
+              name: ROUTE_NAMES.CARRER,
+              component: Carrer,
             },
             {
               path: 'company',
               name: ROUTE_NAMES.COMPANY,
               component: Company
+            },
+            {
+              path: 'tech',
+              name: ROUTE_NAMES.TECH,
+              component: Tech
             }
           ]
         }

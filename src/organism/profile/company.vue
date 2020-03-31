@@ -2,7 +2,7 @@
   <div class="company">
     <ProfileCard
       v-for="carrer in carrerArray"
-      :key="carrer"
+      :key="carrer.companyName"
       :carrerObject="carrer"
     ></ProfileCard>
   </div>

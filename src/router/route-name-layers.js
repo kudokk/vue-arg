@@ -22,14 +22,10 @@ const spiderArray = (() => {
 export const ROUTE_NAME_LAYERS = Object.freeze({
   // トップの階層に属するルート名
   PROFILE: (() => {
-    const obj = {}
-    obj[ROUTE_NAMES.CARRER] = carrerArray
-    return obj
+    return { [ROUTE_NAMES.CARRER]: carrerArray }
   })(),
 
   LEARN: (() => {
-    const obj = {}
-    obj[ROUTE_NAMES.SPIDER] = spiderArray
-    return obj
+    return { [ROUTE_NAMES.SPIDER]: spiderArray }
   })()
 })
