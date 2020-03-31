@@ -7,8 +7,13 @@
     "dev": "webpack-dev-server --hot",
     "build-html": "cpx \"./public/**/*.{html,svg,ttf,woff,png,json}\" ./dist",
     "build-js": "webpack --config webpack.production.js",
-    "build": "npm run build-html && npm run build-js"
+    "build": "npm run build-html && npm run build-js",
+    "ga": "git add ."
   },
+  "pre-commit": [
+    "build",
+    "ga"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -38,6 +43,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "jest": "^23.6.0",
     "node-sass": "^4.9.2",
+    "pre-commit": "^1.2.2",
     "sass-loader": "^7.0.3",
     "sass-resources-loader": "^2.0.1",
     "url-loader": "^1.1.2",
