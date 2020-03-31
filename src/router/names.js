@@ -16,6 +16,8 @@ export const ROUTE_NAMES = Object.freeze({
   SENGOKU: 'sengoku',
   TONNY: 'tonny',
   SAKENOMI: 'sakenomi',
+  // REACTIVE
+  REACTIVE: 'reactive',
   // エラーページ
   ERROR: 'error'
 })

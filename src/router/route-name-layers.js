@@ -26,6 +26,9 @@ export const ROUTE_NAME_LAYERS = Object.freeze({
   })(),
 
   LEARN: (() => {
-    return { [ROUTE_NAMES.SPIDER]: spiderArray }
+    return {
+      [ROUTE_NAMES.SPIDER]: spiderArray,
+      [ROUTE_NAMES.REACTIVE]: [ ROUTE_NAMES.REACTIVE ]
+    }
   })()
 })

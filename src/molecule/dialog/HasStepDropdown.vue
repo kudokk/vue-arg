@@ -1,13 +1,13 @@
 <template>
   <div class="dropdown">
-    <ul class="dropdown__list">
-      <li v-for="item in keyList" class="dropdown__item">
+    <ul v-for="(item, index) in keyList" class="dropdown__list">
+      <li class="dropdown__item">
         <TileButton 
           class="dropdown__button"
           :text="item"
           @emit-on-click="clicked($event, item)" />
       </li>
-      <li v-for="item in childList" class="dropdown__item">
+      <li v-for="item in childList(index)" class="dropdown__item">
         <TileButton 
           class="dropdown__button dropdown__button--child"
           :text="item"
@@ -35,15 +35,15 @@ export default {
   computed: {
     keyList() {
       return Object.keys(this.stepMap)
-    },
-    childList() {
-      return this.stepMap[Object.keys(this.stepMap)[0]]
     }
   },
 
   methods: {
     clicked(ev, item) {
       this.$emit('emit-on-click', item)
+    },
+    childList(index) {
+      return this.stepMap[Object.keys(this.stepMap)[index]]
     }
   }
 }

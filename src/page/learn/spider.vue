@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="title">
+      <a href="https://qiita.com/i-ryo/items/baa50cf0a6647fe8bd2e" class="title__link">こちら</a>を参考に学習
+    </div>
     <TodoList/>
     <Meigen />
     <Linda />
@@ -31,3 +34,13 @@ export default {
   }
 }
 </script>
+
+<style lang="sass" scoped>
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 100%;
+}
+</style>

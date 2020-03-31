@@ -19,7 +19,6 @@
             <HasStepDropdown
               v-if="isDropdownActive(link)"
               @mouseover="openDropdown(link)"
-              @mouseleave="closeDropdown(link)"
               class="link__dropdown"
               :stepMap="getDropdownList(link)"
               @emit-on-click="clicked" />
@@ -57,8 +56,8 @@ export default {
         const LEARN = ROUTE_NAMES.LEARN
         const PROFILE = ROUTE_NAMES.PROFILE
         const obj = {}
-        obj[LEARN] = false
-        obj[PROFILE] = false
+        obj[LEARN] = true
+        obj[PROFILE] = true
         return obj
       })()
     }
