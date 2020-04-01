@@ -7,11 +7,13 @@ import Profile from '@/page/profile'
 import Carrer from '@/page/profile/carrer'
 import Learn from '@/page/learn'
 import Spider from '@/page/learn/spider'
+import Reactive from '@/page/learn/reactive'
 // Profile
 import Company from '@/organism/profile/company'
 import Tech from '@/organism/profile/tech'
 
 // Lean
+// spider
 import TodoList from '@/organism/learn/spider/todoList'
 import Meigen from '@/organism/learn/spider/meigen'
 import Linda from '@/organism/learn/spider/linda'
@@ -19,6 +21,8 @@ import Warikan from '@/organism/learn/spider/warikan'
 import Sengoku from '@/organism/learn/spider/sengokuquiz'
 import Tonny from '@/organism/learn/spider/tonnyRoom'
 import Sakenomi from '@/organism/learn/spider/sakeNomi'
+// reactive
+import VueSystem from '@/organism/learn/reactive/vueSystem'
 
 Vue.use(Router)
 
@@ -134,6 +138,23 @@ export default new Router({
             }
           ]
         },
+        {
+          path: 'reactive',
+          name: ROUTE_NAMES.REACTIVE,
+          component: Reactive,
+          children: [
+            {
+              path: '',
+              name: ROUTE_NAMES.REACTIVE,
+              component: Reactive,
+            },
+            {
+              path: 'vueSystem',
+              name: ROUTE_NAMES.VUESYSTEM,
+              component: VueSystem,
+            }
+          ]
+        }
       ]
     }
   ]

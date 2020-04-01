@@ -19,6 +19,12 @@ const spiderArray = (() => {
   ]
 })()
 
+const reactiveArray = (() => {
+  return [
+    ROUTE_NAMES.VUESYSTEM
+  ]
+})()
+
 export const ROUTE_NAME_LAYERS = Object.freeze({
   // トップの階層に属するルート名
   PROFILE: (() => {
@@ -28,7 +34,7 @@ export const ROUTE_NAME_LAYERS = Object.freeze({
   LEARN: (() => {
     return {
       [ROUTE_NAMES.SPIDER]: spiderArray,
-      [ROUTE_NAMES.REACTIVE]: [ ROUTE_NAMES.REACTIVE ]
+      [ROUTE_NAMES.REACTIVE]: reactiveArray
     }
   })()
 })

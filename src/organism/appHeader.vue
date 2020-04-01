@@ -56,8 +56,8 @@ export default {
         const LEARN = ROUTE_NAMES.LEARN
         const PROFILE = ROUTE_NAMES.PROFILE
         const obj = {}
-        obj[LEARN] = true
-        obj[PROFILE] = true
+        obj[LEARN] = false
+        obj[PROFILE] = false
         return obj
       })()
     }
