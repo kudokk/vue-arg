@@ -19,6 +19,7 @@ export const ROUTE_NAMES = Object.freeze({
   // REACTIVE
   REACTIVE: 'reactive',
   VUESYSTEM: 'vueSystem',
+  DEFINEPROPERTY: 'defineProperty',
   // エラーページ
   ERROR: 'error'
 })

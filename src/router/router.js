@@ -23,6 +23,7 @@ import Tonny from '@/organism/learn/spider/tonnyRoom'
 import Sakenomi from '@/organism/learn/spider/sakeNomi'
 // reactive
 import VueSystem from '@/organism/learn/reactive/vueSystem'
+import DefineProperty from '@/organism/learn/reactive/DefineProperty'
 
 Vue.use(Router)
 
@@ -141,7 +142,7 @@ export default new Router({
         {
           path: 'reactive',
           name: ROUTE_NAMES.REACTIVE,
-          component: Reactive,
+          component: ChildrenAll,
           children: [
             {
               path: '',
@@ -152,6 +153,11 @@ export default new Router({
               path: 'vueSystem',
               name: ROUTE_NAMES.VUESYSTEM,
               component: VueSystem,
+            },
+            {
+              path: 'defineProperty',
+              name: ROUTE_NAMES.DEFINEPROPERTY,
+              component: DefineProperty,
             }
           ]
         }

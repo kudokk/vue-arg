@@ -21,7 +21,8 @@ const spiderArray = (() => {
 
 const reactiveArray = (() => {
   return [
-    ROUTE_NAMES.VUESYSTEM
+    ROUTE_NAMES.VUESYSTEM,
+    ROUTE_NAMES.DEFINEPROPERTY
   ]
 })()
 
