@@ -24,6 +24,7 @@ import Sakenomi from '@/organism/learn/spider/sakeNomi'
 // reactive
 import VueSystem from '@/organism/learn/reactive/vueSystem'
 import DefineProperty from '@/organism/learn/reactive/DefineProperty'
+import DeepCopy from '@/organism/learn/reactive/DeepCopy'
 
 Vue.use(Router)
 
@@ -158,6 +159,11 @@ export default new Router({
               path: 'defineProperty',
               name: ROUTE_NAMES.DEFINEPROPERTY,
               component: DefineProperty,
+            },
+            {
+              path: 'deepCopy',
+              name: ROUTE_NAMES.DEEPCOPY,
+              component: DeepCopy,
             }
           ]
         }

@@ -6,10 +6,17 @@
       <li>0〜2(32乗)−2の整数として解釈できない文字列であるプロパティを、挿入順に列挙する</li>
       <li>シンボルであるプロパティを、挿入順に列挙する</li>
     </ol>
+    <div>
+      <span v-for="number in testOrderArrayNumber" :key="number">
+        {{ number }}
+      </span>
+    </div>
   </div>
 </template>
 
 <script>
+const testArray = [1, 21, 10, 9]
+
 export default {
   data() {
     return {
@@ -25,7 +32,14 @@ export default {
         '10': 'test10',
         '9': 'test9'
       },
-      testOrderSetStringNumber: {}
+      testOrderArrayNumber: testArray,
+      testOrderSetStringNumber: {},
+      testOrderString: {
+        'test1': 'test1',
+        'test21': 'test21',
+        'test10': 'test10',
+        'test9': 'test9'
+      },
     }
   },
 
@@ -35,11 +49,12 @@ export default {
     console.log('---- this.testOrderStringNumber ----')
     this.consoleOrder(this.testOrderStringNumber)
     console.log('---- this.testOrderSetStringNumber ----')
-    const testArray = [1, 21, 10, 9]
     testArray.forEach(testNum => {
       this.$set(this.testOrderSetStringNumber, testNum, `test${testNum}`)
     })
     this.consoleOrder(this.testOrderSetStringNumber)
+    console.log('---- this.testOrderString ----')
+    this.consoleOrder(this.testOrderString)
   },
 
   methods: {
@@ -48,6 +63,7 @@ export default {
       Object.getOwnPropertyNames(testObject).forEach(testOrder => console.log(testOrder))
       Object.keys(testObject).forEach(testOrder => console.log(testOrder))
       Object.values(testObject).forEach(testOrder => console.log(testOrder))
+      Object.entries(testObject).forEach(testOrder => console.log(testOrder[0]))
     }
   }
 }
